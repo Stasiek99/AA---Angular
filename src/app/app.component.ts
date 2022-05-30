@@ -1,7 +1,13 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {listOfCountries} from "./db.mock";
 import {Country} from "./country.interface";
+import {HttpClient} from "@angular/common/http";
+
+export interface JSONCountry {
+  name: string;
+  code: string;
+}
 
 @Component({
   selector: 'app-root',
@@ -9,12 +15,26 @@ import {Country} from "./country.interface";
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent{
+export class AppComponent implements OnInit{
 
+  private readonly jsonURL = "assets/countries.json";
   private readonly urlFragment = "https://www.google.com/search?q=";
 
   filtredCountries: Country[] = [];
   inputValue: string = '';
+
+  constructor(private http: HttpClient) {
+  }
+
+  ngOnInit(): void {
+    this.http.get<(JSONCountry)[]>(this.jsonURL)
+      .subscribe(countries => {
+        console.log(countries);
+        this.jsonCountries = countries;
+      })
+  }
+
+  jsonCountries: JSONCountry[] = [];
 
   onChangesSearchBarInput(searchString: string){
     this.filtredCountries = this.getFiltredCountries(searchString);
