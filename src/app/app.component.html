@@ -7,10 +7,9 @@
 
   <section class="search-results">
   <ul>
-    <li *ngFor="let item of filtredCountries" (click)="onSelectAutoCompleteElements(item.label)">
-      <p>{{item.label}}</p>
+    <li *ngFor="let item of jsonCountries" (click)="onSelectAutoCompleteElements(item.name)">
+      <p>{{item.name}}</p>
     </li>
   </ul>
 </section>
 
-<pre>{{jsonCountries | json}}</pre>

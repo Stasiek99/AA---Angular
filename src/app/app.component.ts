@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 
-import {listOfCountries} from "./db.mock";
-import {Country} from "./country.interface";
 import {HttpClient} from "@angular/common/http";
 
 export interface JSONCountry {
@@ -20,7 +18,6 @@ export class AppComponent implements OnInit{
   private readonly jsonURL = "assets/countries.json";
   private readonly urlFragment = "https://www.google.com/search?q=";
 
-  filtredCountries: Country[] = [];
   inputValue: string = '';
 
   constructor(private http: HttpClient) {
@@ -29,7 +26,6 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.http.get<(JSONCountry)[]>(this.jsonURL)
       .subscribe(countries => {
-        console.log(countries);
         this.jsonCountries = countries;
       })
   }
@@ -37,14 +33,13 @@ export class AppComponent implements OnInit{
   jsonCountries: JSONCountry[] = [];
 
   onChangesSearchBarInput(searchString: string){
-    this.filtredCountries = this.getFiltredCountries(searchString);
+    this.jsonCountries = this.getFilteredCountries(searchString);
   }
 
   onSelectAutoCompleteElements(labelElement: string): void{
     this.inputValue = labelElement;
     this.redirectToGoogle()
   }
-
 
   onSubmit(): void{
     this.redirectToGoogle();
@@ -55,30 +50,7 @@ export class AppComponent implements OnInit{
     window.location.href = searchRedirectUrlWithQuery;
   }
 
-
-  private getFiltredCountries(searchString: string){
-    return listOfCountries.filter(elem => elem.label.includes(searchString));
+  private getFilteredCountries(searchString: string){
+    return this.jsonCountries.filter(elem => elem.name.toLowerCase().includes(searchString));
   }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
