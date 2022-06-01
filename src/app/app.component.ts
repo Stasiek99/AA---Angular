@@ -1,11 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-
 import {HttpClient} from "@angular/common/http";
 
-export interface JSONCountry {
-  name: string;
-  code: string;
-}
+import {CountryElement} from "./country-element-interface";
 
 @Component({
   selector: 'app-root',
@@ -24,13 +20,13 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.http.get<(JSONCountry)[]>(this.jsonURL)
+    this.http.get<CountryElement[]>(this.jsonURL)
       .subscribe(countries => {
         this.jsonCountries = countries;
       })
   }
 
-  jsonCountries: JSONCountry[] = [];
+  jsonCountries: CountryElement[] = [];
 
   onChangesSearchBarInput(searchString: string){
     this.jsonCountries = this.getFilteredCountries(searchString);
