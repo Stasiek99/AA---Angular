@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {CountryDataService} from "./country-data.service";
 
 @NgModule({
   declarations: [
@@ -14,7 +15,7 @@ import {HttpClientModule} from "@angular/common/http";
     FormsModule,
     HttpClientModule
   ],
-  providers: [HttpClientModule],
+  providers: [HttpClientModule, CountryDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
