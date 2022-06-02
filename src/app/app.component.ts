@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnIn
 import {HttpClient} from "@angular/common/http";
 
 import {CountryElement} from "./country-element-interface";
 import {CountryDataService} from "./country-data.service";
+
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,7 @@ import {CountryDataService} from "./country-data.service";
 })
 
 export class AppComponent implements OnInit{
-
-
+  
   private readonly urlFragment = "https://www.google.com/search?q=";
 
   inputValue: string = '';
@@ -32,6 +32,7 @@ export class AppComponent implements OnInit{
 
   onChangesSearchBarInput(searchString: string){
     this.filteredCountries = this.getFilteredCountries(searchString);
+
   }
 
   onSelectAutoCompleteElements(labelElement: string): void{
