@@ -8,7 +8,7 @@ import {CountryDataService} from "./country-data.service";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
