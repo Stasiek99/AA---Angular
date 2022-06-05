@@ -1,11 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-
+import {Component, OnInit} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 
-export interface JSONCountry {
-  name: string;
-  code: string;
-}
+import {CountryElement} from "./country-element-interface";
+import {CountryDataService} from "./country-data.service";
+
 
 @Component({
   selector: 'app-root',
@@ -15,25 +13,26 @@ export interface JSONCountry {
 
 export class AppComponent implements OnInit{
 
-  private readonly jsonURL = "assets/countries.json";
   private readonly urlFragment = "https://www.google.com/search?q=";
 
   inputValue: string = '';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private countryDataService: CountryDataService) {
   }
 
   ngOnInit(): void {
-    this.http.get<(JSONCountry)[]>(this.jsonURL)
+    this.countryDataService.httpGetData()
       .subscribe(countries => {
-        this.jsonCountries = countries;
+        this.allCountries = countries;
       })
   }
 
-  jsonCountries: JSONCountry[] = [];
+  allCountries: CountryElement[] = [];
+  filteredCountries: CountryElement[] = [];
 
   onChangesSearchBarInput(searchString: string){
-    this.jsonCountries = this.getFilteredCountries(searchString);
+    this.filteredCountries = this.getFilteredCountries(searchString);
+
   }
 
   onSelectAutoCompleteElements(labelElement: string): void{
@@ -51,6 +50,6 @@ export class AppComponent implements OnInit{
   }
 
   private getFilteredCountries(searchString: string){
-    return this.jsonCountries.filter(elem => elem.name.toLowerCase().includes(searchString));
+    return this.allCountries.filter(elem => elem.name.toLowerCase().includes(searchString.toLowerCase()));
   }
 }
