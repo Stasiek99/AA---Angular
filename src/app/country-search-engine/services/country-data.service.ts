@@ -1,6 +1,7 @@
-import {CountryElement} from "./country-element-interface";
 import {HttpClient} from "@angular/common/http";
 import {Injectable} from "@angular/core";
+
+import {CountryElement} from "../interfaces/country-element-interface";
 
 @Injectable()
 export class CountryDataService{

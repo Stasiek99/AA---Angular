@@ -1,20 +1,21 @@
 import { NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppComponent } from './app.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-import {CountryDataService} from "./country-data.service";
+
+import { AppComponent } from './app.component';
+import {CountryDataService} from "./country-search-engine/services/country-data.service";
+import {CountrySearchEngineModule} from "./country-search-engine/country-search-engine.module";
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    CountrySearchEngineModule
   ],
   providers: [HttpClientModule, CountryDataService],
   bootstrap: [AppComponent]

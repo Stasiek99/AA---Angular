@@ -1,0 +1,17 @@
+<h1>Search For a Country</h1>
+<div class="search-bar__wrapper">
+  <app-search-input
+    [inputValue]="inputValue"
+    (searchBarChanged)="onSearchBarInputChanged($event)"
+    (submit)="onSubmitted()"
+  ></app-search-input>
+</div>
+<section class="search-results">
+  <ul>
+    <app-search-autocomplete
+      [filteredCountries]="filteredCountries"
+      [inputValue]="inputValue"
+      (autoComplete)="onAutoCompleteElementsSelected($event)"
+    ></app-search-autocomplete>
+  </ul>
+</section>

@@ -1,15 +1,1 @@
-<h1>Search For a Country</h1>
-
-<div class="search-bar__wrapper">
-  <input type="text" class="search-bar" [(ngModel)]="inputValue" (ngModelChange)="onChangesSearchBarInput($event)">
-  <button [disabled]="!inputValue" (click)="onSubmit()">Search</button>
-</div>
-
-  <section class="search-results">
-  <ul>
-    <li *ngFor="let item of filteredCountries" (click)="onSelectAutoCompleteElements(item.name)">
-      <p>{{item.name}}</p>
-    </li>
-  </ul>
-</section>
-
+<app-country-search-engine></app-country-search-engine>
